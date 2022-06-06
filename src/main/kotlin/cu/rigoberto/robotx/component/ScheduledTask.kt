@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component
 class ScheduledTask {
     @Scheduled(fixedDelayString = "\${fixedDelay.in.miliseconds}")
     fun checkPage() {
-        System.out.println("Estoy entrando")
+        //System.out.println("Estoy entrando")
     }
 }
