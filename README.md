@@ -6,3 +6,4 @@ curl -F "url=https://lit-sea-07478.herokuapp.com/webhook" https://api.telegram.o
 comandos:
 heroku logs --tail
 git push heroku main
+heroku pg:psql
