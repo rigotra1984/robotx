@@ -15,12 +15,15 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
-        <kotlin.version>1.6.21</kotlin.version>
+        <kotlin.version>1.5.31</kotlin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <selenium-java.version>4.2.1</selenium-java.version>
         <htmlunit-driver.version>3.62.0</htmlunit-driver.version>
         <awaitility.version>4.2.0</awaitility.version>
+        <java-telegram-bot-api.version>6.0.1</java-telegram-bot-api.version>
+        <telegrambots.version>6.0.1</telegrambots.version>
+        <kotlinx-coroutines-core.version>1.6.2</kotlinx-coroutines-core.version>
     </properties>
     <dependencies>
         <dependency>
@@ -64,6 +67,21 @@
             <artifactId>awaitility-kotlin</artifactId>
             <version>${awaitility.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-core</artifactId>
+            <version>${kotlinx-coroutines-core.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.pengrad</groupId>-->
+<!--            <artifactId>java-telegram-bot-api</artifactId>-->
+<!--            <version>${java-telegram-bot-api.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.telegram</groupId>-->
+<!--            <artifactId>telegrambots</artifactId>-->
+<!--            <version>${telegrambots.version}</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 
