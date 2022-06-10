@@ -189,7 +189,8 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/static/frontend</outputDirectory>
+<!--                            <outputDirectory>${project.build.outputDirectory}/static/frontend</outputDirectory>-->
+                            <outputDirectory>${project.basedir}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${frontendSrcDir}/build</directory>
