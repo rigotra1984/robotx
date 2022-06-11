@@ -1,6 +1,5 @@
 import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
-import Menu from "../../components/Menu";
 import Task from "../../components/Task";
 
 const Home = (props) => {
