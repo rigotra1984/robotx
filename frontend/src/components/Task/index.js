@@ -1,19 +1,46 @@
 import React from 'react';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, Table} from 'react-bootstrap';
 
 const Task = (props) => {
 
     return (
-        <Card style={{ width: '18rem' }} bg="success" className="mb-2">
+        <Card className="mb-3">
+            <Card.Header>Detalles de Filtro</Card.Header>
             <Card.Body>
-                <Card.Title>Card Title</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    <Table className={"table-borderless"}>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nombre campo1</th>
+                                <td>Valor</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                 </Card.Text>
                 <Button variant="primary">Boton1</Button>
                 <Button variant="danger">Eliminar</Button>
             </Card.Body>
+            <Card.Footer className="text-muted">2 days ago</Card.Footer>
         </Card>
     );
 }

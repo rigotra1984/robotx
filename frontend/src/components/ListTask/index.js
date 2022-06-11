@@ -7,7 +7,7 @@ const ListTask = (props) => {
     return (
         <Row className="justify-content-md-center">
             {data.map((a) => (
-                <Col md="auto">
+                <Col sm={6} lg={4}>
                     <Task />
                 </Col>
             ))}
