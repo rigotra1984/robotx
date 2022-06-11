@@ -55,7 +55,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -189,7 +188,6 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-<!--                            <outputDirectory>${project.build.outputDirectory}/static/frontend</outputDirectory>-->
                             <outputDirectory>${project.basedir}/target/classes/static</outputDirectory>
                             <resources>
                                 <resource>
@@ -203,5 +201,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
