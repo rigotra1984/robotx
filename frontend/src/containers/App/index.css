@@ -50,6 +50,6 @@
     margin-right: 5px;
 }
 
-.table.colorfy {
-    color: white;
+body, #root {
+    background-color: #282c34;
 }
