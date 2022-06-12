@@ -36,3 +36,20 @@
         transform: rotate(360deg);
     }
 }
+
+.svg-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.svg-wrapper > svg {
+    /*display: block;*/
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+    margin-right: 5px;
+}
+
+.table.colorfy {
+    color: white;
+}

@@ -6,9 +6,9 @@ const ListTask = (props) => {
     const {data} = props
     return (
         <Row className="justify-content-md-center">
-            {data.map((a) => (
+            {data.map((item) => (
                 <Col sm={6} lg={4}>
-                    <Task />
+                    <Task item={item}/>
                 </Col>
             ))}
         </Row>

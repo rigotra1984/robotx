@@ -1,5 +1,6 @@
 import React from 'react';
 import {Navbar, Nav, Container} from 'react-bootstrap';
+import { FaPlus } from 'react-icons/fa';
 
 const Menu = (props) => {
     const {onCreate} = props
@@ -8,7 +9,7 @@ const Menu = (props) => {
             <Container>
                 <Navbar.Brand href="/">Navbar</Navbar.Brand>
                 <Nav className="justify-content-md-right">
-                    <Nav.Link onClick={onCreate}>Create</Nav.Link>
+                    <Nav.Link onClick={onCreate} className={"svg-wrapper"}><FaPlus/> Create</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>
