@@ -1,4 +1,4 @@
-package cu.rigoberto.robotx.model
+package cu.rigoberto.robotx.model.entity
 
 import javax.persistence.*
 import javax.validation.constraints.NotEmpty

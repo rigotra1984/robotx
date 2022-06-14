@@ -1,6 +1,6 @@
 package cu.rigoberto.robotx.controller
 
-import cu.rigoberto.robotx.model.PersonEntity
+import cu.rigoberto.robotx.model.entity.PersonEntity
 import cu.rigoberto.robotx.repository.PersonRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

@@ -1,14 +1,8 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
+import AppReducer from './containers/App/reducers';
 
-import appContainerReducer from './containers/App/reducers';
-/**
- * Merges the main reducer with the router state and dynamically injected reducers
- */
-export default function createReducer(injectedReducers = {}) {
-	const rootReducer = combineReducers({
-		root: appContainerReducer,
-		...injectedReducers,
-	});
+const rootReducer = combineReducers({
+    AppReducer,
+});
 
-	return rootReducer;
-}
+export default rootReducer;

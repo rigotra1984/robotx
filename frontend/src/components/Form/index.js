@@ -1,5 +1,7 @@
 import Create from './Create';
+import CreateLoad from './CreateLoad';
 
 export {
-    Create
+    Create,
+    CreateLoad
 }

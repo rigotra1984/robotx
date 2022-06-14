@@ -1,27 +1,27 @@
-/* eslint-disable complexity */
-import produce from 'immer';
-
 import {
-	LOADING_START,
-	LOADING_END,
+    LOADING_START_END,
+    GET_ALL_PERSONS_RESPONSE,
+    ERROR,
 } from './constants';
 
-export const initialState = {
-	loading: false,
+const initialState = {
+    loading: false,
+    error: null,
+    persons: []
 };
 
-export default function reducer(state = initialState, action) {
-	return produce(state, (draft) => {
-		switch (action.type) {
-			case LOADING_START:
-				draft.loading = true;
-				break;
-			case LOADING_END:
-				draft.loading = false;
-				break;
-			default:
-				draft.loading = initialState.loading;
-				break;
-		}
-	});
-}
+const AppReducer = (state = initialState, action) => {
+    const {type, payload} = action;
+    switch (type) {
+        case LOADING_START_END:
+            return { ...state, loading: payload.isLoading};
+        case GET_ALL_PERSONS_RESPONSE:
+            return { ...state, persons: payload.persons};
+        case ERROR:
+            return { ...state, error: payload.error};
+        default:
+            return state;
+    }
+};
+
+export default AppReducer;

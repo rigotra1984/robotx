@@ -1,21 +1,36 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 // import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import {Container, Row, Col, Button} from 'react-bootstrap';
-import LoadingOverlay from 'react-loading-overlay'
+import {Container, Row, Col} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import {compose} from 'redux';
+// import {useSelector, useDispatch} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import './index.css'
 import Menu from '../../components/Menu'
 // import Home from '../Home';
 // import Prueba1 from '../Prueba1';
 // import Prueba2 from '../Prueba2';
 import ListTask from '../../components/ListTask';
-import Modal from '../../components/DialogModal';
-import {Create} from '../../components/Form';
+import {CreateLoad} from '../../components/Form';
 import DialogModal from "../../components/DialogModal";
+import * as actions from './actions';
+import Loading from "../../components/Loading";
 
 const App = (props) => {
-    const [modalShow, setModalShow] = React.useState(false);
+    const {
+        loading,
+        error,
+        persons,
+        getAllPersonRequestAction,
+        loadingStartAndEndAction,
+        sendErrorAction,
+    } = props;
+
+    useEffect(() => {
+        getAllPersonRequestAction();
+    }, []);
+
+    const [modalCreateShow, setModalCreateShow] = React.useState(false);
 
     const data = [
         {id: '1', status: 'active'},
@@ -26,38 +41,23 @@ const App = (props) => {
         {id: '6', status: 'inactive'},
         {id: '7', status: 'active'},
         {id: '8', status: 'active'},
-    ]
+    ];
 
-    const configs = {
-        animate: true,
-        // top: `5em`,
-        clickDismiss: true,
-        escapeDismiss: false,
-        showCloseIcon: false,
-        // focusOutline: false,
-    };
-
-    const [isOpen, setOverlay] = useState(false);
-
-    const onCreate = () => {
-        setModalShow(!modalShow);
+    const onCreateHandler = () => {
+        setModalCreateShow(false);
     };
 
     return (
-        <LoadingOverlay
-            active={isOpen}
-            spinner
-            text='Loading your content...'
-        >
+        <>
             <Container>
                 <Row>
                     <Col>
-                        <Menu onCreate={onCreate}/>
+                        <Menu onCreate={() => setModalCreateShow(true)}/>
                     </Col>
                 </Row>
             </Container>
             <Container fluid="md">
-                <ListTask data={data}/>
+                <ListTask data={data} persons={persons}/>
                 {/*<BrowserRouter>*/}
                 {/*    <Routes>*/}
                 {/*        <Route exact path='/' element={<Home/>}/>*/}
@@ -66,13 +66,33 @@ const App = (props) => {
                 {/*    </Routes>*/}
                 {/*</BrowserRouter>*/}
             </Container>
-            <DialogModal show={modalShow} onHide={() => setModalShow(false)}>
-                <Create/>
+            <DialogModal
+                onHide={() => setModalCreateShow(false)}
+                show={modalCreateShow}
+                title={'Nueva Tarea'}
+                primarybuttontext={'Aceptar'}
+                secondbuttontext={'Cancelar'}
+                onPrimaryButtonHandler={onCreateHandler}
+                onSecondButtonButtonHandler={() => setModalCreateShow(false)}>
+                <CreateLoad/>
             </DialogModal>
-        </LoadingOverlay>
+            <DialogModal
+                onHide={() => loadingStartAndEndAction(false)}
+                show={error !== null}
+                title={'Error'}
+                primarybuttontext={'Aceptar'}
+                onPrimaryButtonHandler={() => sendErrorAction(null)}>
+                <div>{error}</div>
+            </DialogModal>
+            <Loading show={loading} type={'bounce'} onHide={() => loadingStartAndEndAction(false)} />
+        </>
     );
 };
 
-App.propTypes = {};
+const mapStateToProps = state => ({
+    loading: state.AppReducer.loading,
+    error: state.AppReducer.error,
+    persons: state.AppReducer.persons,
+});
 
-export default App;
+export default connect(mapStateToProps, actions)(App);
