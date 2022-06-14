@@ -69,7 +69,7 @@ const App = (props) => {
             <DialogModal
                 onHide={() => setModalCreateShow(false)}
                 show={modalCreateShow}
-                title={'Nueva Tarea'}
+                title={'New Load Filter'}
                 primarybuttontext={'Aceptar'}
                 secondbuttontext={'Cancelar'}
                 onPrimaryButtonHandler={onCreateHandler}

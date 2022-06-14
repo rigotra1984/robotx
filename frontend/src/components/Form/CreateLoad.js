@@ -10,6 +10,7 @@ import './CreateLoad.css'
 const CreateLoad = (props) => {
 
     const [origin, setOrigin] = useState([])
+    const [destination, setDestination] = useState([])
     const [pickupDateRange, setPickupDateRange] = useState([null, null]);
     const [pickupStartDate, pickupEndDate] = pickupDateRange;
 
@@ -34,18 +35,48 @@ const CreateLoad = (props) => {
 
     return (
         <Form>
-            <Form.Label>Origin</Form.Label>
-            <InputGroup className="mb-3">
-                <TagsInput className="form-control" value={origin} onChange={(value) => {setOrigin(value)}} />
-                {/*<FormControl aria-label="Origin" placeholder="Enter origin" />*/}
-                <FormControl aria-label="Radius" placeholder="Enter radius" />
-            </InputGroup>
+            <Row>
+                <Col md={8}>
+                    <Form.Group className="mb-3" controlId="formBasicText">
+                        <Form.Label>Origin</Form.Label>
+                        <TagsInput className="form-control" value={origin} onChange={(value) => {setOrigin(value)}} />
+                    </Form.Group>
+                </Col>
+                <Col md={4}>
+                    <Form.Group className="mb-3" controlId="formBasicText">
+                        <Form.Label>&nbsp;</Form.Label>
+                        <FormControl aria-label="Radius" placeholder="Enter radius" />
+                    </Form.Group>
+                </Col>
+            </Row>
 
-            <Form.Label>Destination</Form.Label>
-            <InputGroup className="mb-3">
-                <FormControl aria-label="Destination" placeholder="Enter destination" />
-                <FormControl aria-label="Radius" placeholder="Enter radius" />
-            </InputGroup>
+            <Row>
+                <Col md={8}>
+                    <Form.Group className="mb-3" controlId="formBasicText">
+                        <Form.Label>Destination</Form.Label>
+                        <TagsInput className="form-control" value={destination} onChange={(value) => {setDestination(value)}} />
+                    </Form.Group>
+                </Col>
+                <Col md={4}>
+                    <Form.Group className="mb-3" controlId="formBasicText">
+                        <Form.Label>&nbsp;</Form.Label>
+                        <FormControl aria-label="Radius" placeholder="Enter radius" />
+                    </Form.Group>
+                </Col>
+            </Row>
+
+            {/*<Form.Label>Origin</Form.Label>*/}
+            {/*<InputGroup className="mb-3">*/}
+            {/*    <TagsInput className="form-control" value={origin} onChange={(value) => {setOrigin(value)}} />*/}
+            {/*    /!*<FormControl aria-label="Origin" placeholder="Enter origin" />*!/*/}
+            {/*    <FormControl aria-label="Radius" placeholder="Enter radius" />*/}
+            {/*</InputGroup>*/}
+
+            {/*<Form.Label>Destination</Form.Label>*/}
+            {/*<InputGroup className="mb-3">*/}
+            {/*    <FormControl aria-label="Destination" placeholder="Enter destination" />*/}
+            {/*    <FormControl aria-label="Radius" placeholder="Enter radius" />*/}
+            {/*</InputGroup>*/}
 
             <Form.Group className="mb-3" controlId="formBasicText">
                 <Form.Label>Pickup Date</Form.Label>
