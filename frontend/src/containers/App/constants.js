@@ -1,4 +1,10 @@
 export const LOADING_START_END = 'containers/APP/LOADING_START_END';
-export const GET_ALL_PERSONS_REQUEST = 'containers/APP/GET_ALL_PERSONS_REQUEST';
-export const GET_ALL_PERSONS_RESPONSE = 'containers/APP/GET_ALL_PERSONS_RESPONSE';
 export const ERROR = 'containers/APP/ERROR';
+export const GET_ALL_LOAD_REQUEST = 'containers/APP/GET_ALL_LOAD_REQUEST';
+export const GET_ALL_LOAD_RESPONSE = 'containers/APP/GET_ALL_LOAD_RESPONSE';
+export const CREATE_LOAD_REQUEST = 'containers/APP/CREATE_LOAD_REQUEST';
+export const CREATE_LOAD_RESPONSE = 'containers/APP/CREATE_LOAD_RESPONSE';
+export const UPDATE_LOAD_REQUEST = 'containers/APP/UPDATE_LOAD_REQUEST';
+export const UPDATE_LOAD_RESPONSE = 'containers/APP/UPDATE_LOAD_RESPONSE';
+export const DELETE_LOAD_REQUEST = 'containers/APP/DELETE_LOAD_REQUEST';
+export const DELETE_LOAD_RESPONSE = 'containers/APP/DELETE_LOAD_RESPONSE';

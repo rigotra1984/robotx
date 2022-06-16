@@ -56,6 +56,24 @@ export function requestUrl(url, options) {
 		.then(parseJSON);
 }
 
+
+export async function buildBaseHeaders (extraHeaders = {}) {
+	const headers = Object.assign({}, {
+		'Accept': 'application/json',
+		'Content-Type': 'application/json',
+	}, extraHeaders);
+
+	return {
+		headers,
+	};
+}
+
+export async function buildHeaderOptions(token, options, extraHeaders = {}) {
+	const auth = token ? {'Authorization': `${ token}`} : {};
+	const headers = await buildBaseHeaders(Object.assign({}, auth, extraHeaders));
+	return Object.assign({}, headers, options);
+}
+
 /**
  * https://docs.expo.io/versions/v36.0.0/react-native/network/
  *

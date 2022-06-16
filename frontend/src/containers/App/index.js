@@ -2,8 +2,6 @@ import React, {useEffect} from 'react';
 // import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {Container, Row, Col} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import {compose} from 'redux';
-// import {useSelector, useDispatch} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import Menu from '../../components/Menu'
@@ -11,39 +9,69 @@ import Menu from '../../components/Menu'
 // import Prueba1 from '../Prueba1';
 // import Prueba2 from '../Prueba2';
 import ListTask from '../../components/ListTask';
-import {CreateLoad} from '../../components/Form';
 import DialogModal from "../../components/DialogModal";
 import * as actions from './actions';
 import Loading from "../../components/Loading";
+import {DialogModalCreateLoad} from '../../components/Form';
 
 const App = (props) => {
     const {
         loading,
         error,
-        persons,
-        getAllPersonRequestAction,
+        loads,
         loadingStartAndEndAction,
         sendErrorAction,
+        getAllLoadRequestAction,
+        createLoadRequestAction,
+        updateLoadRequestAction,
+        deleteLoadRequestAction,
     } = props;
 
     useEffect(() => {
-        getAllPersonRequestAction();
+        getAllLoadRequestAction();
     }, []);
 
     const [modalCreateShow, setModalCreateShow] = React.useState(false);
+    const [loadObject, setLoadObject] = React.useState({
+        id: '',
+        originValues: '',
+        originRadius: '',
+        destinationValues: '',
+        destinationRadius: '',
+        pickupStart: '',
+        pickupEnd: '',
+        equipmentType: [],//multiples
+        loadNumber: '',
+        advancedDisplayPreference: '',
+        advancedPickupStart: '',
+        advancedPickupEnd: '',
+        advancedPickupStartTime: '',
+        advancedPickupEndTime: '',
+        advancedDeliveryStart: '',
+        advancedDeliveryEnd: '',
+        advancedDeliveryStartTime: '',
+        advancedDeliveryEndTime: '',
+        advancedEquipmentMaxLength: '',
+        advancedEquipmentMaxWeigth: '',
+        advancedAttributes: [] //multiples
+    });
 
-    const data = [
-        {id: '1', status: 'active'},
-        {id: '2', status: 'active'},
-        {id: '3', status: 'programmed'},
-        {id: '4', status: 'active'},
-        {id: '5', status: 'inactive'},
-        {id: '6', status: 'inactive'},
-        {id: '7', status: 'active'},
-        {id: '8', status: 'active'},
-    ];
+    const onCreateOrUpdateHandler = (item) => {
+        if(item.id) {
+            updateLoadRequestAction(item);
+        } else {
+            createLoadRequestAction(item);
+        }
+        setModalCreateShow(false);
+    };
 
-    const onCreateHandler = () => {
+    const onUpdateHandler = (item) => {
+        setLoadObject(item);
+        setModalCreateShow(true);
+    };
+
+    const onDeleteHandler = (item) => {
+        deleteLoadRequestAction(item);
         setModalCreateShow(false);
     };
 
@@ -57,7 +85,7 @@ const App = (props) => {
                 </Row>
             </Container>
             <Container fluid="md">
-                <ListTask data={data} persons={persons}/>
+                <ListTask data={loads} onUpdateItem={onUpdateHandler} onDeleteItem={onDeleteHandler}/>
                 {/*<BrowserRouter>*/}
                 {/*    <Routes>*/}
                 {/*        <Route exact path='/' element={<Home/>}/>*/}
@@ -66,21 +94,20 @@ const App = (props) => {
                 {/*    </Routes>*/}
                 {/*</BrowserRouter>*/}
             </Container>
-            <DialogModal
+            <DialogModalCreateLoad
                 onHide={() => setModalCreateShow(false)}
                 show={modalCreateShow}
                 title={'New Load Filter'}
-                primarybuttontext={'Aceptar'}
-                secondbuttontext={'Cancelar'}
-                onPrimaryButtonHandler={onCreateHandler}
-                onSecondButtonButtonHandler={() => setModalCreateShow(false)}>
-                <CreateLoad/>
-            </DialogModal>
+                primarybuttontext={'Acept'}
+                secondbuttontext={'Cancel'}
+                item={loadObject}
+                onPrimaryButtonHandler={onCreateOrUpdateHandler}
+                onSecondButtonButtonHandler={() => setModalCreateShow(false)} />
             <DialogModal
                 onHide={() => loadingStartAndEndAction(false)}
                 show={error !== null}
                 title={'Error'}
-                primarybuttontext={'Aceptar'}
+                primarybuttontext={'Acept'}
                 onPrimaryButtonHandler={() => sendErrorAction(null)}>
                 <div>{error}</div>
             </DialogModal>
@@ -92,7 +119,7 @@ const App = (props) => {
 const mapStateToProps = state => ({
     loading: state.AppReducer.loading,
     error: state.AppReducer.error,
-    persons: state.AppReducer.persons,
+    loads: state.AppReducer.loads,
 });
 
 export default connect(mapStateToProps, actions)(App);

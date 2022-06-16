@@ -3,7 +3,7 @@ import {Col, Row} from 'react-bootstrap';
 import Task from '../Task';
 
 const ListTask = (props) => {
-    const {data, persons} = props
+    const {data} = props
 
     const renderItem = (item) => {
         return (
@@ -16,14 +16,18 @@ const ListTask = (props) => {
     const listEmptyComponent = () => {
         console.log('listEmptyComponent');
         return (
-            <div style={{color:'yelow'}}>No hay elementos que mostrar</div>
+            <Row className="justify-content-md-center">
+                <Col>
+                    <div style={{color: 'white', textAlign:'center'}}>No hay elementos que mostrar</div>
+                </Col>
+            </Row>
         );
     };
 
     return (
         <Row className="justify-content-md-center">
-            {/*{persons.length === 0 && listEmptyComponent()}*/}
-            {data.map((item) => (
+            {data.length === 0 && listEmptyComponent()}
+            {data.length > 0 && data.map((item) => (
                 renderItem(item)
             ))}
         </Row>

@@ -1,7 +1,7 @@
 import Create from './Create';
-import CreateLoad from './CreateLoad';
+import DialogModalCreateLoad from './DialogModalCreateLoad';
 
 export {
     Create,
-    CreateLoad
+    DialogModalCreateLoad
 }

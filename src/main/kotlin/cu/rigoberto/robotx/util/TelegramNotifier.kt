@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets
 import java.util.logging.Level
 import java.util.logging.Logger
 
-
 class TelegramNotifier(var apiToken: String, var chatId: String) {
     private val logger: Logger = Logger.getLogger("[TelegramNotifier]")
 
