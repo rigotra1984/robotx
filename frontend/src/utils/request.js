@@ -1,3 +1,4 @@
+const BASE_URL = 'https://lit-sea-07478.herokuapp.com';
 /**
  * Parses the JSON returned by a network request
  *
@@ -51,7 +52,7 @@ export function requestWithResponseText(url, options) {
  * @return {object}           The response data
  */
 export function requestUrl(url, options) {
-	return fetch(url, options)
+	return fetch(BASE_URL + url, options)
 		.then(checkStatus)
 		.then(parseJSON);
 }
