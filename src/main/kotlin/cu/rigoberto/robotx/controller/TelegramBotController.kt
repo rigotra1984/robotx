@@ -9,7 +9,7 @@ import java.util.logging.Level
 import java.util.logging.Logger
 
 @RestController
-@RequestMapping("/webhook")
+@RequestMapping("/api/webhook")
 class TelegramBotController {
 
     private val START_COMMAND = "/start"

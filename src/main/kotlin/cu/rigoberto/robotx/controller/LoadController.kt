@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/load")
+@RequestMapping("/api/load")
 class LoadController(private val loadRepository: LoadRepository) {
     @GetMapping
     fun getAll(): List<LoadModel> = loadRepository.findAll().map { l -> l.toModel() }
