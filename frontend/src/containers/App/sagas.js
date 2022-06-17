@@ -48,8 +48,8 @@ export function* updateLoad(action) {
 export function* deleteLoad(action) {
     const process = function* (payload) {
         const {load} = payload;
-        yield call(deleteLoadByIdService, load.id);
-        yield put(deleteLoadResponseAction(load));
+        const response = yield call(deleteLoadByIdService, load.id);
+        yield put(deleteLoadResponseAction(response));
     };
     yield call(executeAction, process, action);
 }

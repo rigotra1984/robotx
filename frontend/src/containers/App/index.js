@@ -27,12 +27,7 @@ const App = (props) => {
         deleteLoadRequestAction,
     } = props;
 
-    useEffect(() => {
-        getAllLoadRequestAction();
-    }, []);
-
-    const [modalCreateShow, setModalCreateShow] = React.useState(false);
-    const [loadObject, setLoadObject] = React.useState({
+    const loadInitialState = {
         id: '',
         originValues: '',
         originRadius: '',
@@ -54,7 +49,14 @@ const App = (props) => {
         advancedEquipmentMaxLength: '',
         advancedEquipmentMaxWeigth: '',
         advancedAttributes: [] //multiples
-    });
+    };
+
+    useEffect(() => {
+        getAllLoadRequestAction();
+    }, []);
+
+    const [modalCreateShow, setModalCreateShow] = React.useState(false);
+    const [loadObject, setLoadObject] = React.useState(loadInitialState);
 
     const onCreateOrUpdateHandler = (item) => {
         if(item.id) {
@@ -62,6 +64,7 @@ const App = (props) => {
         } else {
             createLoadRequestAction(item);
         }
+        setLoadObject(loadInitialState);
         setModalCreateShow(false);
     };
 
@@ -80,7 +83,7 @@ const App = (props) => {
             <Container>
                 <Row>
                     <Col>
-                        <Menu onCreate={() => setModalCreateShow(true)}/>
+                        <Menu onCreate={() => {setModalCreateShow(true); setLoadObject(loadInitialState);}}/>
                     </Col>
                 </Row>
             </Container>

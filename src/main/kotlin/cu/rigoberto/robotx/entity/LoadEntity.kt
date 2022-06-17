@@ -12,6 +12,10 @@ data class LoadEntity (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int? = null,
 
+    @Column(name="created")
+    @Temporal(TemporalType.TIMESTAMP)
+    val created: Date? = null,
+
     @Column(name="origin_values")
     val originValues: String? = null,
 
@@ -128,17 +132,18 @@ fun LoadEntity.toModel(): LoadModel {
     var equipmentTypeArray: Array<String> = emptyArray()
     if(!this.equipmentType.isNullOrBlank())
     {
-        equipmentTypeArray = this.equipmentType.split(",").toTypedArray()
+        equipmentTypeArray = this.equipmentType.split(",").toTypedArray().map{ it.trim() }.toTypedArray()
     }
 
     var advancedAttributesArray: Array<String> = emptyArray()
     if(!this.advancedAttributes.isNullOrBlank())
     {
-        advancedAttributesArray = this.advancedAttributes.split(",").toTypedArray()
+        advancedAttributesArray = this.advancedAttributes.split(",").toTypedArray().map{ it.trim() }.toTypedArray()
     }
 
     return LoadModel(
         id = this.id,
+        created = this.created,
         originValues = this.originValues,
         originRadius = this.originRadius,
         destinationValues = this.destinationValues,

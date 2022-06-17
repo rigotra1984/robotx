@@ -8,6 +8,7 @@ import cu.rigoberto.robotx.repository.LoadRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.util.*
 import javax.validation.Valid
 
 @RestController
@@ -24,23 +25,29 @@ class LoadController(private val loadRepository: LoadRepository) {
     }
 
     @PostMapping
-    fun create(@Valid @RequestBody newLoad: LoadModel): LoadModel = loadRepository.save(newLoad.toEntity()).toModel()
+    fun create(@Valid @RequestBody newLoad: LoadModel): ResponseEntity<LoadModel> {
+        val createLoad: LoadEntity = newLoad.copy(
+            created = Date(System.currentTimeMillis())
+        ).toEntity()
+        return ResponseEntity.ok().body(loadRepository.save(createLoad).toModel())
+    }
 
     @PutMapping("/{id}")
     fun update(@PathVariable(value = "id") loadId: Int, @Valid @RequestBody newLoad: LoadModel): ResponseEntity<LoadModel> {
         return loadRepository.findById(loadId).map {
             val updatedLoad: LoadEntity = newLoad.copy(
-                id = loadId
+                id = loadId,
+                created = it.created
             ).toEntity()
             ResponseEntity.ok().body(loadRepository.save(updatedLoad).toModel())
         }.orElse(ResponseEntity.notFound().build())
     }
 
     @DeleteMapping("/{id}")
-    fun deletePostById(@PathVariable(value = "id") loadId: Int): ResponseEntity<Void> {
+    fun deletePostById(@PathVariable(value = "id") loadId: Int): ResponseEntity<LoadModel> {
         return loadRepository.findById(loadId).map { existingLoad  ->
             loadRepository.delete(existingLoad)
-            ResponseEntity<Void>(HttpStatus.OK)
+            ResponseEntity.ok().body(loadRepository.save(existingLoad).toModel())
         }.orElse(ResponseEntity.notFound().build())
     }
 }

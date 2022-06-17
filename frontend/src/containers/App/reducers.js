@@ -27,7 +27,7 @@ const AppReducer = (state = initialState, action) => {
         case UPDATE_LOAD_RESPONSE:
             return { ...state, loads: [...state.loads.filter((item) => item.id !== payload.load.id), payload.load]};
         case DELETE_LOAD_RESPONSE:
-            return { ...state, loads: state.loads.filter((item) => item.id !== payload.load.id)};
+            return { ...state, loads: [...state.loads.filter((item) => item.id !== payload.load.id)]};
         default:
             return state;
     }

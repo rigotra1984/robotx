@@ -8,6 +8,9 @@ import java.util.*
 data class LoadModel (
     val id: Int? = null,
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val created: Date? = null,
+
     val originValues: String? = null,
 
     val originRadius: Int? = null,
@@ -16,10 +19,12 @@ data class LoadModel (
 
     val destinationRadius: Int? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val pickupStart: Date? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val pickupEnd: Date? = null,
 
     val equipmentType: Array<String> = emptyArray(),
@@ -29,20 +34,24 @@ data class LoadModel (
     //advanced
     val advancedDisplayPreference: String? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val advancedPickupStart: Date? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val advancedPickupEnd: Date? = null,
 
     val advancedPickupStartTime: String? = null,
 
     val advancedPickupEndTime: String? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val advancedDeliveryStart: Date? = null,
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMMM d, yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     val advancedDeliveryEnd: Date? = null,
 
     val advancedDeliveryStartTime: String? = null,
@@ -65,6 +74,7 @@ data class LoadModel (
         other as LoadModel
 
         if (id != other.id) return false
+        if (created != other.created) return false
         if (originValues != other.originValues) return false
         if (originRadius != other.originRadius) return false
         if (destinationValues != other.destinationValues) return false
@@ -93,6 +103,7 @@ data class LoadModel (
     override fun hashCode(): Int {
         var result = id ?: 0
         result = 31 * result + (originValues?.hashCode() ?: 0)
+        result = 31 * result + (created?.hashCode() ?: 0)
         result = 31 * result + (originRadius ?: 0)
         result = 31 * result + (destinationValues?.hashCode() ?: 0)
         result = 31 * result + (destinationRadius ?: 0)
@@ -120,6 +131,7 @@ data class LoadModel (
 fun LoadModel.toEntity(): LoadEntity {
     return LoadEntity(
         id = this.id,
+        created = this.created,
         originValues = this.originValues,
         originRadius = this.originRadius,
         destinationValues = this.destinationValues,

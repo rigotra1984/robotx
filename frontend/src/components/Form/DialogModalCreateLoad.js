@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal, Button, Row, Col, Form, FormControl, Accordion} from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from "react-datepicker";
@@ -23,26 +23,67 @@ const DialogModalCreateLoad = (props) => {
     ];
 
     //object
-    const [originValues, setOriginValues] = useState(item.originValues? item.originValues: '');
-    const [originRadius, setOriginRadius] = useState(item.originRadius? item.originRadius: '');
-    const [destinationValues, setDestinationValues] = useState(item.destinationValues? item.destinationValues: '');
-    const [destinationRadius, setDestinationRadius] = useState(item.destinationRadius? item.destinationRadius: '');
-    const [pickupDateRange, setPickupDateRange] = useState([item.pickupStart? new Date(item.pickupStart): null, item.pickupStart? new Date(item.pickupEnd): null]);
+    // const [originValues, setOriginValues] = useState(item.originValues? item.originValues: '');
+    // const [originRadius, setOriginRadius] = useState(item.originRadius? item.originRadius: '');
+    // const [destinationValues, setDestinationValues] = useState(item.destinationValues? item.destinationValues: '');
+    // const [destinationRadius, setDestinationRadius] = useState(item.destinationRadius? item.destinationRadius: '');
+    // const [pickupDateRange, setPickupDateRange] = useState([item.pickupStart? new Date(item.pickupStart): null, item.pickupStart? new Date(item.pickupEnd): null]);
+    // const [pickupStartDate, pickupEndDate] = pickupDateRange;
+    // const [selectedEquipmentType, setSelectedEquipmentType] = useState(item.equipmentType && item.equipmentType.length > 0? equipmentTypeOptions.filter((e) => item.equipmentType.indexOf(e.value) >= 0): []);
+    // const [loadNumber, setLoadNumber] = useState(item.loadNumber? item.loadNumber: '');
+    // const [advancedDisplayPreference, setAdvancedDisplayPreference] = useState(item.advancedDisplayPreference? item.advancedDisplayPreference: '');
+    // const [pickupStartDateRangeAdvance, setPickupStartDateRangeAdvance] = useState([item.advancedPickupStart? new Date(item.advancedPickupStart): null, item.advancedPickupEnd? new Date(item.advancedPickupEnd): null]);
+    // const [pickupStartDateAdvance, pickupEndDateAdvance] = pickupStartDateRangeAdvance;
+    // const [pickupAdvanceAppStartDate, setPickupAdvanceAppStartDate] = useState(item.advancedPickupStartTime? new Date(item.advancedPickupStartTime): null);
+    // const [pickupAdvanceAppEndDate, setPickupAdvanceAppEndDate] = useState(item.advancedPickupEndTime? new Date(item.advancedPickupEndTime): null);
+    // const [deliveryStartDateRangeAdvance, setDeliveryStartDateRangeAdvance] = useState([item.advancedDeliveryStart? new Date(item.advancedDeliveryStart): null, item.advancedDeliveryEnd? new Date(item.advancedDeliveryEnd): null]);
+    // const [deliveryStartDateAdvance, deliveryEndDateAdvance] = deliveryStartDateRangeAdvance;
+    // const [deliveryAdvanceAppStartDate, setDeliveryAdvanceAppStartDate] = useState(item.advancedDeliveryStartTime? new Date(item.advancedDeliveryStartTime): null);
+    // const [deliveryAdvanceAppEndDate, setDeliveryAdvanceAppEndDate] = useState(item.advancedDeliveryEndTime? new Date(item.advancedDeliveryEndTime): null);
+    // const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
+    // const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
+    // const [advancedAttributes, setAdvancedAttributes] = useState(item.advancedAttributes && item.advancedAttributes.length > 0? item.advancedAttributes: []);
+
+    const [originValues, setOriginValues] = useState('');
+    const [originRadius, setOriginRadius] = useState('');
+    const [destinationValues, setDestinationValues] = useState('');
+    const [destinationRadius, setDestinationRadius] = useState('');
+    const [pickupDateRange, setPickupDateRange] = useState([null, null]);
     const [pickupStartDate, pickupEndDate] = pickupDateRange;
-    const [selectedEquipmentType, setSelectedEquipmentType] = useState(item.equipmentType && item.equipmentType.length > 0? equipmentTypeOptions.filter((e) => item.equipmentType.indexOf(e.value) >= 0): null);
-    const [loadNumber, setLoadNumber] = useState(item.loadNumber? item.loadNumber: '');
-    const [advancedDisplayPreference, setAdvancedDisplayPreference] = useState(item.advancedDisplayPreference? item.advancedDisplayPreference: '');
-    const [pickupStartDateRangeAdvance, setPickupStartDateRangeAdvance] = useState([item.advancedPickupStart? new Date(item.advancedPickupStart): null, item.advancedPickupEnd? new Date(item.advancedPickupEnd): null]);
+    const [selectedEquipmentType, setSelectedEquipmentType] = useState([]);
+    const [loadNumber, setLoadNumber] = useState('');
+    const [advancedDisplayPreference, setAdvancedDisplayPreference] = useState('');
+    const [pickupStartDateRangeAdvance, setPickupStartDateRangeAdvance] = useState([null, null]);
     const [pickupStartDateAdvance, pickupEndDateAdvance] = pickupStartDateRangeAdvance;
-    const [pickupAdvanceAppStartDate, setPickupAdvanceAppStartDate] = useState(item.advancedPickupStartTime? new Date(item.advancedPickupStartTime): null);
-    const [pickupAdvanceAppEndDate, setPickupAdvanceAppEndDate] = useState(item.advancedPickupEndTime? new Date(item.advancedPickupEndTime): null);
-    const [deliveryStartDateRangeAdvance, setDeliveryStartDateRangeAdvance] = useState([item.advancedDeliveryStart? new Date(item.advancedDeliveryStart): null, item.advancedDeliveryEnd? new Date(item.advancedDeliveryEnd): null]);
+    const [pickupAdvanceAppStartDate, setPickupAdvanceAppStartDate] = useState(null);
+    const [pickupAdvanceAppEndDate, setPickupAdvanceAppEndDate] = useState(null);
+    const [deliveryStartDateRangeAdvance, setDeliveryStartDateRangeAdvance] = useState([null, null]);
     const [deliveryStartDateAdvance, deliveryEndDateAdvance] = deliveryStartDateRangeAdvance;
-    const [deliveryAdvanceAppStartDate, setDeliveryAdvanceAppStartDate] = useState(item.advancedDeliveryStartTime? new Date(item.advancedDeliveryStartTime): null);
-    const [deliveryAdvanceAppEndDate, setDeliveryAdvanceAppEndDate] = useState(item.advancedDeliveryEndTime? new Date(item.advancedDeliveryEndTime): null);
-    const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
-    const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
-    const [advancedAttributes, setAdvancedAttributes] = useState(item.advancedAttributes && item.advancedAttributes.length > 0? item.advancedAttributes: []);
+    const [deliveryAdvanceAppStartDate, setDeliveryAdvanceAppStartDate] = useState(null);
+    const [deliveryAdvanceAppEndDate, setDeliveryAdvanceAppEndDate] = useState(null);
+    const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState('');
+    const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState('');
+    const [advancedAttributes, setAdvancedAttributes] = useState([]);
+
+    useEffect(() => {
+        setOriginValues(item.originValues? item.originValues: '');
+        setOriginRadius(item.originRadius? item.originRadius: '');
+        setDestinationValues(item.destinationValues? item.destinationValues: '');
+        setDestinationRadius(item.destinationRadius? item.destinationRadius: '');
+        setPickupDateRange([item.pickupStart? new Date(item.pickupStart): null, item.pickupStart? new Date(item.pickupEnd): null]);
+        setSelectedEquipmentType(item.equipmentType && item.equipmentType.length > 0? equipmentTypeOptions.filter(e => item.equipmentType.findIndex(e2 => e2 === e.value) >= 0): []);
+        setLoadNumber(item.loadNumber? item.loadNumber: '');
+        setAdvancedDisplayPreference(item.advancedDisplayPreference? item.advancedDisplayPreference: '');
+        setPickupStartDateRangeAdvance([item.advancedPickupStart? new Date(item.advancedPickupStart): null, item.advancedPickupEnd? new Date(item.advancedPickupEnd): null]);
+        setPickupAdvanceAppStartDate(item.advancedPickupStartTime? new Date(item.advancedPickupStartTime): null);
+        setPickupAdvanceAppEndDate(item.advancedPickupEndTime? new Date(item.advancedPickupEndTime): null);
+        setDeliveryStartDateRangeAdvance([item.advancedDeliveryStart? new Date(item.advancedDeliveryStart): null, item.advancedDeliveryEnd? new Date(item.advancedDeliveryEnd): null]);
+        setDeliveryAdvanceAppStartDate(item.advancedDeliveryStartTime? new Date(item.advancedDeliveryStartTime): null);
+        setDeliveryAdvanceAppEndDate(item.advancedDeliveryEndTime? new Date(item.advancedDeliveryEndTime): null);
+        setAdvancedEquipmentMaxLength(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
+        setAdvancedEquipmentMaxWeigth(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
+        setAdvancedAttributes(item.advancedAttributes && item.advancedAttributes.length > 0? item.advancedAttributes: []);
+    }, [item]);
 
     const advancedIsOpen = () => {
         if(item.advancedDisplayPreference) {
@@ -87,7 +128,7 @@ const DialogModalCreateLoad = (props) => {
             destinationRadius,
             pickupStart: pickupStartDate,
             pickupEnd: pickupEndDate,
-            equipmentType: selectedEquipmentType,//multiples
+            equipmentType: selectedEquipmentType.map(obj => obj.value),//multiples
             loadNumber,
             advancedDisplayPreference,
             advancedPickupStart: pickupStartDateAdvance,
@@ -169,7 +210,7 @@ const DialogModalCreateLoad = (props) => {
                             <Form.Group className="mb-3">
                                 <Form.Label>Equipment Type</Form.Label>
                                 <Select
-                                    defaultValue={selectedEquipmentType}
+                                    value={selectedEquipmentType}
                                     onChange={setSelectedEquipmentType}
                                     options={equipmentTypeOptions}
                                     isMulti={true}
