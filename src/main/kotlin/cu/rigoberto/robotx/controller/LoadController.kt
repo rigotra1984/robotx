@@ -47,7 +47,7 @@ class LoadController(private val loadRepository: LoadRepository) {
     fun deletePostById(@PathVariable(value = "id") loadId: Int): ResponseEntity<LoadModel> {
         return loadRepository.findById(loadId).map { existingLoad  ->
             loadRepository.delete(existingLoad)
-            ResponseEntity.ok().body(loadRepository.save(existingLoad).toModel())
+            ResponseEntity.ok().body(existingLoad.toModel())
         }.orElse(ResponseEntity.notFound().build())
     }
 }

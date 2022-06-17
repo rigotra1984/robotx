@@ -380,7 +380,8 @@ const DialogModalCreateLoad = (props) => {
                                                 id="option1"
                                                 autoComplete="off"
                                                 checked={advancedAttributes.includes('Drop Trailer')}
-                                                onChange={(e) => {setAdvancedAttributes([...advancedAttributes, 'Drop Trailer'])}}
+                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Drop Trailer']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Drop Trailer')])}}
+
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option1">Drop Trailer</Form.Label>
                                             {' '}
@@ -391,7 +392,7 @@ const DialogModalCreateLoad = (props) => {
                                                 id="option2"
                                                 autoComplete="off"
                                                 checked={advancedAttributes.includes('Hazmat')}
-                                                onChange={(e) => {setAdvancedAttributes([...advancedAttributes, 'Hazmat'])}}
+                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Hazmat']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Hazmat')])}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option2">Hazmat</Form.Label>
                                             {' '}
@@ -402,7 +403,7 @@ const DialogModalCreateLoad = (props) => {
                                                 id="option3"
                                                 autoComplete="off"
                                                 checked={advancedAttributes.includes('Team')}
-                                                onChange={(e) => {setAdvancedAttributes([...advancedAttributes, 'Team'])}}
+                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Team']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Team')])}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option3">Team</Form.Label>
                                             {' '}
@@ -413,7 +414,7 @@ const DialogModalCreateLoad = (props) => {
                                                 id="option4"
                                                 autoComplete="off"
                                                 checked={advancedAttributes.includes('Load Out')}
-                                                onChange={(e) => {setAdvancedAttributes([...advancedAttributes, 'Load Out'])}}
+                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Load Out']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Load Out')])}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option4">Load Out</Form.Label>
                                         </Form.Group>
