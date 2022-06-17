@@ -7,7 +7,7 @@ const Menu = (props) => {
     return (
         <Navbar bg="dark" variant="dark" fixed="top">
             <Container>
-                <Navbar.Brand href="/">Navbar</Navbar.Brand>
+                <Navbar.Brand href="/">Alert Loads</Navbar.Brand>
                 <Nav className="justify-content-md-right">
                     <Nav.Link onClick={onCreate} className={"svg-wrapper"}><FaPlus/> Create</Nav.Link>
                 </Nav>
