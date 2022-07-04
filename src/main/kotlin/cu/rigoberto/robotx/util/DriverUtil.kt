@@ -17,7 +17,9 @@ class DriverUtil {
 
         fun getChromeOptions(): ChromeOptions {
             var options = ChromeOptions()
-            options.setBinary(System.getenv("GOOGLE_CHROME_BIN"))
+            if(!System.getenv("GOOGLE_CHROME_BIN").equals("test")) {
+                options.setBinary(System.getenv("GOOGLE_CHROME_BIN"))
+            }
             options.addArguments("--headless", "--disable-dev-shm-usage", "--no-sandbox")
 
             return options
