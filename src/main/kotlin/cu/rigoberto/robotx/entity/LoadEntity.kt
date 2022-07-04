@@ -135,12 +135,6 @@ fun LoadEntity.toModel(): LoadModel {
         equipmentTypeArray = this.equipmentType.split(",").toTypedArray().map{ it.trim() }.toTypedArray()
     }
 
-    var advancedAttributesArray: Array<String> = emptyArray()
-    if(!this.advancedAttributes.isNullOrBlank())
-    {
-        advancedAttributesArray = this.advancedAttributes.split(",").toTypedArray().map{ it.trim() }.toTypedArray()
-    }
-
     return LoadModel(
         id = this.id,
         created = this.created,
@@ -163,7 +157,7 @@ fun LoadEntity.toModel(): LoadModel {
         advancedDeliveryEndTime = this.advancedDeliveryEndTime,
         advancedEquipmentMaxLength = this.advancedEquipmentMaxLength,
         advancedEquipmentMaxWeigth = this.advancedEquipmentMaxWeigth,
-        advancedAttributes = advancedAttributesArray,//multiple
+        advancedAttributes = this.advancedAttributes,
         status = this.status()
     )
 }

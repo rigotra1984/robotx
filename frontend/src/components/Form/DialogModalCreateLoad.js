@@ -63,7 +63,7 @@ const DialogModalCreateLoad = (props) => {
     const [deliveryAdvanceAppEndDate, setDeliveryAdvanceAppEndDate] = useState(null);
     const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState('');
     const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState('');
-    const [advancedAttributes, setAdvancedAttributes] = useState([]);
+    const [advancedAttributes, setAdvancedAttributes] = useState('');
 
     useEffect(() => {
         setOriginValues(item.originValues? item.originValues: '');
@@ -82,7 +82,7 @@ const DialogModalCreateLoad = (props) => {
         setDeliveryAdvanceAppEndDate(item.advancedDeliveryEndTime? new Date(item.advancedDeliveryEndTime): null);
         setAdvancedEquipmentMaxLength(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
         setAdvancedEquipmentMaxWeigth(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
-        setAdvancedAttributes(item.advancedAttributes && item.advancedAttributes.length > 0? item.advancedAttributes: []);
+        setAdvancedAttributes(item.advancedAttributes? item.advancedAttributes: '');
     }, [item]);
 
     const advancedIsOpen = () => {
@@ -374,47 +374,46 @@ const DialogModalCreateLoad = (props) => {
                                     <Col>
                                         <Form.Group className="mb-3">
                                             <Form.Control
-                                                type="checkbox"
+                                                type="radio"
                                                 className="btn-check"
                                                 name="options"
                                                 id="option1"
                                                 autoComplete="off"
-                                                checked={advancedAttributes.includes('Drop Trailer')}
-                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Drop Trailer']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Drop Trailer')])}}
-
+                                                checked={advancedAttributes === 'Drop Trailer'}
+                                                onChange={(e) => { if(e.target.checked) {setAdvancedAttributes('Drop Trailer')}}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option1">Drop Trailer</Form.Label>
                                             {' '}
                                             <Form.Control
-                                                type="checkbox"
+                                                type="radio"
                                                 className="btn-check"
                                                 name="options"
                                                 id="option2"
                                                 autoComplete="off"
-                                                checked={advancedAttributes.includes('Hazmat')}
-                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Hazmat']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Hazmat')])}}
+                                                checked={advancedAttributes === 'Hazmat'}
+                                                onChange={(e) => {if(e.target.checked) {setAdvancedAttributes('Hazmat')}}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option2">Hazmat</Form.Label>
                                             {' '}
                                             <Form.Control
-                                                type="checkbox"
+                                                type="radio"
                                                 className="btn-check"
                                                 name="options"
                                                 id="option3"
                                                 autoComplete="off"
-                                                checked={advancedAttributes.includes('Team')}
-                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Team']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Team')])}}
+                                                checked={advancedAttributes === 'Team'}
+                                                onChange={(e) => {if(e.target.checked) {setAdvancedAttributes('Team')}}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option3">Team</Form.Label>
                                             {' '}
                                             <Form.Control
-                                                type="checkbox"
+                                                type="radio"
                                                 className="btn-check"
                                                 name="options"
                                                 id="option4"
                                                 autoComplete="off"
-                                                checked={advancedAttributes.includes('Load Out')}
-                                                onChange={(e) => {e.target.checked? setAdvancedAttributes([...advancedAttributes, 'Load Out']): setAdvancedAttributes([...advancedAttributes.filter(e => e !== 'Load Out')])}}
+                                                checked={advancedAttributes === 'Load Out'}
+                                                onChange={(e) => {if(e.target.checked) {setAdvancedAttributes('Load Out')}}}
                                             />
                                             <Form.Label className="btn btn-outline-primary" htmlFor="option4">Load Out</Form.Label>
                                         </Form.Group>

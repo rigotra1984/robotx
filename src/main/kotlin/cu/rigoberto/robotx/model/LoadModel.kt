@@ -62,7 +62,7 @@ data class LoadModel (
 
     val advancedEquipmentMaxWeigth: Float? = null,
 
-    val advancedAttributes: Array<String> = emptyArray(),
+    val advancedAttributes: String? = null,
 
     val status: String? = null,
 
@@ -94,7 +94,7 @@ data class LoadModel (
         if (advancedDeliveryEndTime != other.advancedDeliveryEndTime) return false
         if (advancedEquipmentMaxLength != other.advancedEquipmentMaxLength) return false
         if (advancedEquipmentMaxWeigth != other.advancedEquipmentMaxWeigth) return false
-        if (!advancedAttributes.contentEquals(other.advancedAttributes)) return false
+        if (advancedAttributes != other.advancedAttributes) return false
         if (status != other.status) return false
 
         return true
@@ -122,7 +122,7 @@ data class LoadModel (
         result = 31 * result + (advancedDeliveryEndTime?.hashCode() ?: 0)
         result = 31 * result + (advancedEquipmentMaxLength?.hashCode() ?: 0)
         result = 31 * result + (advancedEquipmentMaxWeigth?.hashCode() ?: 0)
-        result = 31 * result + advancedAttributes.contentHashCode()
+        result = 31 * result + (advancedAttributes?.hashCode() ?: 0)
         result = 31 * result + (status?.hashCode() ?: 0)
         return result
     }
@@ -151,6 +151,6 @@ fun LoadModel.toEntity(): LoadEntity {
         advancedDeliveryEndTime = this.advancedDeliveryEndTime,
         advancedEquipmentMaxLength = this.advancedEquipmentMaxLength,
         advancedEquipmentMaxWeigth = this.advancedEquipmentMaxWeigth,
-        advancedAttributes = this.advancedAttributes.joinToString(),//multiple
+        advancedAttributes = this.advancedAttributes,
     )
 }
