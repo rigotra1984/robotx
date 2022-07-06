@@ -93,8 +93,9 @@ class CoyoteAccess(private val loads: List<LoadEntity>, private val userName: St
             return
         }
 
-        for (entity in loads) {
-            var model = entity.toModel()
+        for (e in loads) {
+            entity = e
+            var model = e.toModel()
 //			filterAdvancedButton();
 //			filterResetButton();
             if (!model.originValues.isNullOrBlank()) {
@@ -491,6 +492,19 @@ class CoyoteAccess(private val loads: List<LoadEntity>, private val userName: St
     }
 
     @Throws(java.lang.Exception::class)
+    private fun nextPageButton() {
+        try {
+            DriverUtil.wait?.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@id='next-page']")))
+            DriverUtil.driver?.findElement(By.xpath("//button[@id='next-page']"))?.click()
+
+            accessEvent.onStepCompleted("nextPageButton")
+        } catch (e: java.lang.Exception) {
+            accessEvent.onStepError("nextPageButton", e)
+            throw java.lang.Exception("Fallo el procesamiento de NextPageButton: " + e.message)
+        }
+    }
+
+    @Throws(java.lang.Exception::class)
     private fun checkResult() {
         try {
             DriverUtil.wait?.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='search-result-container-region']//span[contains(text(), 'Results')]")))
@@ -499,8 +513,20 @@ class CoyoteAccess(private val loads: List<LoadEntity>, private val userName: St
             val count = if (countString == result.text) 0 else countString.toInt()
             if (count > 0) {
                 var i = 1
+                var pack = 0
                 while (i <= count) {
-                    proccessResultRow(i++)
+                    var pos = i
+                    if(i > 20) {
+                        pos = i % 20
+                    }
+                    if(pack == 20) {
+                        pack = 0
+                        nextPageButton()
+                        waitLoading()
+                    }
+                    proccessResultRow(pos)
+                    i++
+                    pack++
                 }
             }
 
@@ -522,10 +548,10 @@ class CoyoteAccess(private val loads: List<LoadEntity>, private val userName: St
             val totalPrice = if (totalPrices.isNotEmpty()) totalPrices[0]?.text else null
             val miPrice = if (miPrices.isNotEmpty()) miPrices[0]?.text else null
 
-            accessEvent.onFindedRow(id, origin, totalPrice, miPrice, entity!!)
+            accessEvent.onFindedRow(id, origin, totalPrice, miPrice)
         } catch (e: java.lang.Exception) {
-            accessEvent.onStepError("checkResult", e)
-            throw java.lang.Exception("Fallo el procesamiento de checkResult: " + e.message)
+            accessEvent.onStepError("proccessResultRow", e)
+            throw java.lang.Exception("Fallo el procesamiento de proccessResultRow: " + e.message)
         }
     }
 }

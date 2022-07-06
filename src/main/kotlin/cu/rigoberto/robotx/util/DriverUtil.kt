@@ -19,7 +19,8 @@ class DriverUtil {
             if(!System.getenv("GOOGLE_CHROME_BIN").equals("test")) {
                 options.setBinary(System.getenv("GOOGLE_CHROME_BIN"))
             }
-            options.addArguments("--headless", "--disable-dev-shm-usage", "--no-sandbox")
+//            options.addArguments("--headless", "--disable-dev-shm-usage", "--no-sandbox")
+            options.addArguments("headless", "disable-gpu", "window-size=1920x1080", "disable-dev-shm-usage", "no-sandbox")
 
             return options
         }

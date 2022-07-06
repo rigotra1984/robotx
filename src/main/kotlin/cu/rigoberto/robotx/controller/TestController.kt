@@ -34,13 +34,15 @@ class TestController(private val findedRepository: FindedRepository) {
     @GetMapping
     fun testRequest(): ResponseEntity<ArrayList<String>> {
 
+//        System.setProperty("webdriver.chrome.driver","/Users/rigo/ProjectSoft/selenium-driver/chromedriver")
+
         var loads = ArrayList<LoadEntity>()
         var load1 = LoadEntity(
             id = 1,
             created = Date(System.currentTimeMillis()),
             originValues = "West Monroe, LA",
-            equipmentType = "Reefer",
-            destinationValues = "Elk River, MN",
+            //equipmentType = "Reefer",
+            //destinationValues = "Elk River, MN",
             minMiPrice = 2.68f
         )
         loads.add(load1)
@@ -49,24 +51,24 @@ class TestController(private val findedRepository: FindedRepository) {
             override fun onStepCompleted(step: String) {
                 events.add(step)
             }
-            override fun onFindedRow(id: String, origin: String, totalPrice: String?, miPrice: String?, entity: LoadEntity) {
+            override fun onFindedRow(id: String, origin: String, totalPrice: String?, miPrice: String?) {
                 events.add("Elemento encontrado con id $id, origin $origin, totalPrice $totalPrice, miPrice $miPrice")
-                var totalPriceValue: Float? = null
-                if(!totalPrice.isNullOrBlank()) {
-                    totalPrice?.replace("$", "").replace(",", "").also { totalPriceValue = it.toFloat() }//$2,786.96
-                }
-                var miPriceValue: Float? = null
-                if(!miPrice.isNullOrBlank()) {
-                    miPrice?.replace("$", "").replace(",", "").replace("/mi", "").also { miPriceValue = it.toFloat() }//$2.53/mi
-                }
-                var finded = FindedEntity(id, Date(System.currentTimeMillis()), origin, totalPriceValue, miPriceValue, entity)
-                if(miPriceValue!! > entity.minMiPrice!!) {
-                    var exist = findedRepository.existsById(id)
-                    if(!exist) {
-                        findedRepository.save(finded)
-                        sendMessage("Se encontró una carga con origen $origin, pago por millas de $miPrice y un pago total de $totalPrice")
-                    }
-                }
+//                var totalPriceValue: Float? = null
+//                if(!totalPrice.isNullOrBlank()) {
+//                    totalPrice?.replace("$", "").replace(",", "").also { totalPriceValue = it.toFloat() }//$2,786.96
+//                }
+//                var miPriceValue: Float? = null
+//                if(!miPrice.isNullOrBlank()) {
+//                    miPrice?.replace("$", "").replace(",", "").replace("/mi", "").also { miPriceValue = it.toFloat() }//$2.53/mi
+//                }
+//                var finded = FindedEntity(id, Date(System.currentTimeMillis()), origin, totalPriceValue, miPriceValue, entity)
+//                if(miPriceValue!! > entity.minMiPrice!!) {
+//                    var exist = findedRepository.existsById(id)
+//                    if(!exist) {
+//                        findedRepository.save(finded)
+//                        sendMessage("Se encontró una carga con origen $origin, pago por millas de $miPrice y un pago total de $totalPrice")
+//                    }
+//                }
             }
             override fun onStepError(step: String, e: Exception) {
                 events.add("Fallo el procesamiento del $step: ${e.message}")
