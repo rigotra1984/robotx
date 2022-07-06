@@ -30,7 +30,6 @@
         <node.version>v15.6.0</node.version>
         <npm.version>7.4.0</npm.version>
         <frontendSrcDir>${project.basedir}/frontend</frontendSrcDir>
-        <heroku-javaagent.version>2.0</heroku-javaagent.version>
     </properties>
     <dependencies>
         <dependency>
@@ -94,12 +93,6 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <version>${selenium-support.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.heroku.agent</groupId>
-            <artifactId>heroku-javaagent</artifactId>
-            <version>${heroku-javaagent.version}</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

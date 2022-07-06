@@ -1,1 +1,1 @@
-web: java -javaagent:heroku-javaagent-2.0.jar=stdout=true,lxmem=true -cp target/robotx-0.0.1-SNAPSHOT.jar
+web: java -jar target/robotx-0.0.1-SNAPSHOT.jar
