@@ -1,6 +1,9 @@
 package cu.rigoberto.robotx.util
 
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
+
 
 class DateUtil {
     companion object {
@@ -28,6 +31,20 @@ class DateUtil {
             calendar.set(Calendar.MILLISECOND, 0)
 
             return calendar.time
+        }
+
+        fun dateFromString(dateRangeStart: String): Date? {
+            val formatter = SimpleDateFormat("MM/dd/yyyy")
+            return try {
+                formatter.parse(dateRangeStart)
+            } catch (e: ParseException) {
+                null
+            }
+        }
+
+        fun dateToString(date: Date): String? {
+            val formatter = SimpleDateFormat("MM/dd/yyyy")
+            return formatter.format(date)
         }
     }
 }

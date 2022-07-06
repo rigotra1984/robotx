@@ -83,6 +83,12 @@ data class LoadEntity (
     @Column(name="advanced_attributes")
     val advancedAttributes: String? = null,
 
+    @Column(name="min_mi_price")
+    val minMiPrice: Float? = null,
+
+    @OneToMany(fetch = FetchType.EAGER, cascade= [CascadeType.ALL], mappedBy = "load")
+    var findeds: Set<FindedEntity>? = null,
+
 )
 
 fun LoadEntity.status(): String {
@@ -158,6 +164,7 @@ fun LoadEntity.toModel(): LoadModel {
         advancedEquipmentMaxLength = this.advancedEquipmentMaxLength,
         advancedEquipmentMaxWeigth = this.advancedEquipmentMaxWeigth,
         advancedAttributes = this.advancedAttributes,
-        status = this.status()
+        status = this.status(),
+        minMiPrice = this.minMiPrice
     )
 }

@@ -48,7 +48,8 @@ const App = (props) => {
         advancedDeliveryEndTime: '',
         advancedEquipmentMaxLength: '',
         advancedEquipmentMaxWeigth: '',
-        advancedAttributes: ''
+        advancedAttributes: '',
+        minMiPrice: '',
     };
 
     useEffect(() => {

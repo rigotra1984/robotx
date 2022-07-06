@@ -23,3 +23,6 @@ heroku config:set ENERGY="20 GeV"
 la configuracion local va en el archivo .env
 
 heroku run java -version
+
+mensajes del bot, de aqui se extraen los chat_id
+https://api.telegram.org/bot5476986181:AAHp8RnUld1hvPo4z5ucWTDsQy59CZkDM08/getUpdates

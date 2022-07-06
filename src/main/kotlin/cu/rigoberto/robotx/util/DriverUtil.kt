@@ -8,7 +8,6 @@ import java.net.MalformedURLException
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
-
 class DriverUtil {
     companion object {
 
@@ -38,7 +37,7 @@ class DriverUtil {
             IllegalAccessException::class
         )
         fun openWebSite() {
-            val site = "https://www.google.com.cu"
+            val site = "https://go.coyote.com"
             System.setProperty("webdriver.chrome.driver", System.getenv("CHROMEDRIVER_PATH"))
 
             driver?.manage()?.timeouts()?.implicitlyWait(0, TimeUnit.SECONDS);

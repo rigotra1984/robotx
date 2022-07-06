@@ -66,7 +66,50 @@ data class LoadModel (
 
     val status: String? = null,
 
+    val minMiPrice: Float? = null,
+
     ) {
+
+    fun isAdvanced(): Boolean {
+        if (!advancedDisplayPreference.isNullOrBlank()) {
+            return true
+        }
+        if (advancedPickupStart != null) {
+            return true
+        }
+        if (advancedPickupEnd != null) {
+            return true
+        }
+        if (!advancedPickupStartTime.isNullOrBlank()) {
+            return true
+        }
+        if (!advancedPickupEndTime.isNullOrBlank()) {
+            return true
+        }
+        if (advancedDeliveryStart != null) {
+            return true
+        }
+        if (advancedDeliveryEnd != null) {
+            return true
+        }
+        if (!advancedDeliveryStartTime.isNullOrBlank()) {
+            return true
+        }
+        if (!advancedDeliveryEndTime.isNullOrBlank()) {
+            return true
+        }
+        if (advancedEquipmentMaxLength != null) {
+            return true
+        }
+        if (advancedEquipmentMaxWeigth != null) {
+            return true
+        }
+        if (!advancedAttributes.isNullOrBlank()) {
+            return true
+        }
+
+        return false
+    }
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -96,6 +139,7 @@ data class LoadModel (
         if (advancedEquipmentMaxWeigth != other.advancedEquipmentMaxWeigth) return false
         if (advancedAttributes != other.advancedAttributes) return false
         if (status != other.status) return false
+        if (minMiPrice != other.minMiPrice) return false
 
         return true
     }
@@ -124,6 +168,7 @@ data class LoadModel (
         result = 31 * result + (advancedEquipmentMaxWeigth?.hashCode() ?: 0)
         result = 31 * result + (advancedAttributes?.hashCode() ?: 0)
         result = 31 * result + (status?.hashCode() ?: 0)
+        result = 31 * result + (minMiPrice?.hashCode() ?: 0)
         return result
     }
 }
@@ -152,5 +197,6 @@ fun LoadModel.toEntity(): LoadEntity {
         advancedEquipmentMaxLength = this.advancedEquipmentMaxLength,
         advancedEquipmentMaxWeigth = this.advancedEquipmentMaxWeigth,
         advancedAttributes = this.advancedAttributes,
+        minMiPrice = this.minMiPrice,
     )
 }

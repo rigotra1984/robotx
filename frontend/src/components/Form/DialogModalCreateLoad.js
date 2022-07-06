@@ -22,28 +22,6 @@ const DialogModalCreateLoad = (props) => {
         { value: 'Power Only', label: 'Power Only' },
     ];
 
-    //object
-    // const [originValues, setOriginValues] = useState(item.originValues? item.originValues: '');
-    // const [originRadius, setOriginRadius] = useState(item.originRadius? item.originRadius: '');
-    // const [destinationValues, setDestinationValues] = useState(item.destinationValues? item.destinationValues: '');
-    // const [destinationRadius, setDestinationRadius] = useState(item.destinationRadius? item.destinationRadius: '');
-    // const [pickupDateRange, setPickupDateRange] = useState([item.pickupStart? new Date(item.pickupStart): null, item.pickupStart? new Date(item.pickupEnd): null]);
-    // const [pickupStartDate, pickupEndDate] = pickupDateRange;
-    // const [selectedEquipmentType, setSelectedEquipmentType] = useState(item.equipmentType && item.equipmentType.length > 0? equipmentTypeOptions.filter((e) => item.equipmentType.indexOf(e.value) >= 0): []);
-    // const [loadNumber, setLoadNumber] = useState(item.loadNumber? item.loadNumber: '');
-    // const [advancedDisplayPreference, setAdvancedDisplayPreference] = useState(item.advancedDisplayPreference? item.advancedDisplayPreference: '');
-    // const [pickupStartDateRangeAdvance, setPickupStartDateRangeAdvance] = useState([item.advancedPickupStart? new Date(item.advancedPickupStart): null, item.advancedPickupEnd? new Date(item.advancedPickupEnd): null]);
-    // const [pickupStartDateAdvance, pickupEndDateAdvance] = pickupStartDateRangeAdvance;
-    // const [pickupAdvanceAppStartDate, setPickupAdvanceAppStartDate] = useState(item.advancedPickupStartTime? new Date(item.advancedPickupStartTime): null);
-    // const [pickupAdvanceAppEndDate, setPickupAdvanceAppEndDate] = useState(item.advancedPickupEndTime? new Date(item.advancedPickupEndTime): null);
-    // const [deliveryStartDateRangeAdvance, setDeliveryStartDateRangeAdvance] = useState([item.advancedDeliveryStart? new Date(item.advancedDeliveryStart): null, item.advancedDeliveryEnd? new Date(item.advancedDeliveryEnd): null]);
-    // const [deliveryStartDateAdvance, deliveryEndDateAdvance] = deliveryStartDateRangeAdvance;
-    // const [deliveryAdvanceAppStartDate, setDeliveryAdvanceAppStartDate] = useState(item.advancedDeliveryStartTime? new Date(item.advancedDeliveryStartTime): null);
-    // const [deliveryAdvanceAppEndDate, setDeliveryAdvanceAppEndDate] = useState(item.advancedDeliveryEndTime? new Date(item.advancedDeliveryEndTime): null);
-    // const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
-    // const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
-    // const [advancedAttributes, setAdvancedAttributes] = useState(item.advancedAttributes && item.advancedAttributes.length > 0? item.advancedAttributes: []);
-
     const [originValues, setOriginValues] = useState('');
     const [originRadius, setOriginRadius] = useState('');
     const [destinationValues, setDestinationValues] = useState('');
@@ -64,6 +42,7 @@ const DialogModalCreateLoad = (props) => {
     const [advancedEquipmentMaxLength, setAdvancedEquipmentMaxLength] = useState('');
     const [advancedEquipmentMaxWeigth, setAdvancedEquipmentMaxWeigth] = useState('');
     const [advancedAttributes, setAdvancedAttributes] = useState('');
+    const [minMiPrice, setMinMiPrice] = useState('');
 
     useEffect(() => {
         setOriginValues(item.originValues? item.originValues: '');
@@ -83,6 +62,7 @@ const DialogModalCreateLoad = (props) => {
         setAdvancedEquipmentMaxLength(item.advancedEquipmentMaxLength? item.advancedEquipmentMaxLength: '');
         setAdvancedEquipmentMaxWeigth(item.advancedEquipmentMaxWeigth? item.advancedEquipmentMaxWeigth: '');
         setAdvancedAttributes(item.advancedAttributes? item.advancedAttributes: '');
+        setMinMiPrice(item.minMiPrice? item.minMiPrice: '');
     }, [item]);
 
     const advancedIsOpen = () => {
@@ -141,7 +121,8 @@ const DialogModalCreateLoad = (props) => {
             advancedDeliveryEndTime: deliveryAdvanceAppEndDate,
             advancedEquipmentMaxLength: advancedEquipmentMaxLength,
             advancedEquipmentMaxWeigth: advancedEquipmentMaxWeigth,
-            advancedAttributes: advancedAttributes //multiples
+            advancedAttributes: advancedAttributes,
+            minMiPrice: minMiPrice
         };
 
         onPrimaryButtonHandler(object);
@@ -170,7 +151,7 @@ const DialogModalCreateLoad = (props) => {
                         </Col>
                         <Col md={4}>
                             <Form.Group className="mb-3">
-                                <Form.Label>&nbsp;</Form.Label>
+                                <Form.Label>Origin Radius</Form.Label>
                                 <FormControl aria-label="Radius" placeholder="Radius" value={originRadius} onChange={(e) => setOriginRadius(e.target.value)} />
                             </Form.Group>
                         </Col>
@@ -185,7 +166,7 @@ const DialogModalCreateLoad = (props) => {
                         </Col>
                         <Col md={4}>
                             <Form.Group className="mb-3">
-                                <Form.Label>&nbsp;</Form.Label>
+                                <Form.Label>Destination Radius</Form.Label>
                                 <FormControl aria-label="Radius" placeholder="Radius" value={destinationRadius} onChange={(e) => setDestinationRadius(e.target.value)} />
                             </Form.Group>
                         </Col>
@@ -206,7 +187,7 @@ const DialogModalCreateLoad = (props) => {
                     </Form.Group>
 
                     <Row>
-                        <Col>
+                        <Col md={8}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Equipment Type</Form.Label>
                                 <Select
@@ -217,7 +198,7 @@ const DialogModalCreateLoad = (props) => {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col>
+                        <Col md={4}>
                             <Form.Group className="mb-3">
                                 <Form.Label>Load Number</Form.Label>
                                 <Form.Control type="text" placeholder="Load Number" value={loadNumber} onChange={(e) => setLoadNumber(e.target.value)} />
@@ -225,7 +206,7 @@ const DialogModalCreateLoad = (props) => {
                         </Col>
                     </Row>
 
-                    <Accordion defaultActiveKey={advancedIsOpen()}>
+                    <Accordion className="mb-3" defaultActiveKey={advancedIsOpen()}>
                         <Accordion.Item eventKey="0">
                             <Accordion.Header>ADVANCED SEARCH</Accordion.Header>
                             <Accordion.Body>
@@ -422,6 +403,16 @@ const DialogModalCreateLoad = (props) => {
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
+
+                    <Row>
+                        <Col>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Min Price for Mille</Form.Label>
+                                <Form.Control type="text" placeholder="Load Number" value={minMiPrice} onChange={(e) => setMinMiPrice(e.target.value)} />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
                 </Form>
             </Modal.Body>
             <Modal.Footer>
