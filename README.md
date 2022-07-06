@@ -26,3 +26,10 @@ heroku run java -version
 
 mensajes del bot, de aqui se extraen los chat_id
 https://api.telegram.org/bot5476986181:AAHp8RnUld1hvPo4z5ucWTDsQy59CZkDM08/getUpdates
+
+heroku labs:enable log-runtime-metrics
+heroku plugins:install heroku-cli-java
+    heroku java:jconsole
+    heroku java:visualvm
+    heroku java:jmap
+    heroku java:jstack
